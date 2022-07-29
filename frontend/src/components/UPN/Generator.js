@@ -6,7 +6,9 @@ import upnForm from "./UpnForm";
 export class Generator extends Component {
 
     state = {
-        user: []
+        user: [],
+        codes: [],
+        codeId: "",
     }
 
     static contextType = AuthContext
@@ -28,12 +30,26 @@ export class Generator extends Component {
             const response = await fetch('/user/getUserInfo', options)
             const body = await response.json()
             this.setState({user: body})
+
+            const response2 = await fetch('/api/codes');
+            const body2 = await response2.json();
+            this.setState({codes: body2});
         }
     }
 
+     updateKey = (e) => {
+
+         let {value} = e.target;
+         this.setState({
+              codeId: value,
+
+         });
+
+         console.log(value)
+    }
 
     render() {
-        const {user} = this.state;
+        const {user,codes,codeId} = this.state;
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card">
@@ -76,9 +92,13 @@ export class Generator extends Component {
                             <div className="form-group">
                                 <label>Payment Code</label>
                                 <select className="form-control" autoComplete="off"
-                                        title="Payment Code" required id="forma" name="paymentCode">
-                                    <option>Please choose</option>
-                                    <option></option>
+                                        title="Payment Code" required id="paymentCode" name="paymentCode" onChange={this.updateKey}>
+                                    <option selected="selected">Please choose</option>
+                                    {
+                                        codes.map((code, ix) => (
+                                            <option key={ix+1} value={code.code}>{code.code}</option>
+                                        ))
+                                    }
                                 </select>
                             </div>
                             <div className="form-group" id="namena">
