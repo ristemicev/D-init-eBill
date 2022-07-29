@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
 import AuthContext from "../Context/AuthContext";
+import upnForm from "./UpnForm";
+
 
 export class Generator extends Component {
+
+    state = {
+        user: []
+    }
 
     static contextType = AuthContext
 
@@ -19,16 +25,15 @@ export class Generator extends Component {
                 body: loggedUser.id,
             };
 
-            const response = await fetch('/user/getUserInfo', options).then((data) => data.json())
-            this.setState({user: response});
-
-            console.log(response)
-            console.log(this.user)
+            const response = await fetch('/user/getUserInfo', options)
+            const body = await response.json()
+            this.setState({user: body})
         }
     }
 
 
     render() {
+        const {user} = this.state;
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card">
@@ -42,14 +47,20 @@ export class Generator extends Component {
                                        className="form-control"
                                        id="cc_name"
                                        title="First and last name"
-                                       required="required" disabled></input>
+                                       required="required" disabled
+                                       placeholder={user.name}
+                                ></input>
                             </div>
                             <div className="form-group">
                                 <label>Recipient IBAN</label>
                                 <select className="form-control"
                                         autoComplete="off"
                                         title="Recipient's IBAN" required name="recipientIBAN">
-                                    <option></option>
+                                    {
+                                        user.accounts?.map((acc, ix) => (
+                                            <option key={ix} value={acc.number}>{acc.number}</option>
+                                        ))
+                                    }
                                 </select>
                             </div>
                             <div className="form-group">
@@ -59,6 +70,7 @@ export class Generator extends Component {
                                        id="cc_address"
                                        title="Recipient's Address"
                                        required="required"
+                                       value={user.address}
                                        disabled></input>
                             </div>
                             <div className="form-group">
