@@ -8,7 +8,7 @@ export class EditCodes extends Component {
     };
 
     async componentDidMount() {
-        const response = await fetch('/codes');
+        const response = await fetch('/api/codes');
         const body = await response.json();
         this.setState({codes: body});
     }
@@ -35,8 +35,8 @@ export class EditCodes extends Component {
                                 <td>{code.code}</td>
                                 <td>{code.slo}</td>
                                 <td>{code.eng}</td>
-                                <td className="text-center"><a href=""><MdEdit/></a></td>
-                                <td className="text-center"><a href=""><MdDeleteForever/></a></td>
+                                <td className="text-center"><a href={'/api/update/' + code.id}><MdEdit/></a></td>
+                                <td className="text-center"><a href={'/api/delete/' + code.id}><MdDeleteForever/></a></td>
                             </tr>
                     ))}
                     </tbody>
