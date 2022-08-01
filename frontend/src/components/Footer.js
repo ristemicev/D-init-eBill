@@ -5,15 +5,9 @@ import Img from "react-image";
 
 function Footer(){
     return (
-        <footer className={ "bg-darkcelar" }>
+        <footer className={ "container-fluid bg-darkcelar" }>
             <hr/>
             <Row className={"text-center"}>
-                <Col>
-                    <br/>
-                    <span className="mb-3 mb-md-0 text-muted">© 2022 Micev R. & Milivojcevic M.</span></Col>
-                <Col>
-                    <img height={"30%"} src={"/eBill.png"}/>
-                </Col>
                 <Col>
                     <div>
                         <br/>
@@ -32,6 +26,14 @@ function Footer(){
                             <a href={"#"}><GrLinkedin/></a>
                             <a style={{padding: "5%"}} href={"#"}><GrGithub/></a>
                         </div>
+                    </div>
+                </Col>
+                <Col>
+                    <img width={"30%"} src={"/eBill.png"}/>
+                </Col>
+                <Col>
+                    <div className={""}>    
+                        <span className="text-muted">© 2022 Micev & Milivojcevic </span>
                     </div>
                 </Col>
             </Row>
