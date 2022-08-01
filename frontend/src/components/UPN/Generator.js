@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import AuthContext from "../Context/AuthContext";
 import {handleLogError} from "../Helpers";
 
@@ -8,7 +8,9 @@ export class Generator extends Component {
     state = {
         user: [],
         codes: [],
+        req: []
     }
+
 
     static contextType = AuthContext
 
@@ -65,6 +67,8 @@ export class Generator extends Component {
             reference: data.get('reference')
         }
 
+        this.state.req=req
+
         const options = {
             headers: {'Content-type': 'application/json'},
             method: 'POST',
@@ -72,8 +76,10 @@ export class Generator extends Component {
         };
 
         console.log(req)
-        window.location.href="/generate/show?data="+req
+        // window.location.href="/generate/show?data="+req
         // fetch('/upn/generate',options)
+
+
     }
 
     render() {
