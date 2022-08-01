@@ -1,16 +1,18 @@
 import React from "react";
 import {GrGithub, GrInstagram, GrLinkedin} from 'react-icons/gr';
 import {Col, Row} from "react-bootstrap";
+import Img from "react-image";
 
 function Footer(){
     return (
         <footer className={ "bg-darkcelar" }>
+            <hr/>
             <Row className={"text-center"}>
                 <Col>
                     <br/>
                     <span className="mb-3 mb-md-0 text-muted">© 2022 Micev R. & Milivojcevic M.</span></Col>
                 <Col>
-                    <p>eBill</p>
+                    <img height={"30%"} src={"/eBill.png"}/>
                 </Col>
                 <Col>
                     <div>
