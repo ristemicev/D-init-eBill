@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.css"
 import {Container, Nav, Navbar} from "react-bootstrap";
 import AppRouter from "./AppRouter";
 import {AuthProvider} from "./components/Context/AuthContext";
+import Footer from "./components/Footer.js";
+
 
 function App() {
     return (
@@ -20,6 +22,7 @@ function App() {
                 </Container>
             </Navbar>
             <AppRouter/>
+            {<Footer/>}
         </AuthProvider>
     );
 }

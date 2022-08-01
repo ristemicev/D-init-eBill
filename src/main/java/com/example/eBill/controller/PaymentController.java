@@ -31,7 +31,6 @@ public class PaymentController {
         paymentService.deleteCode(id);
     }
 
-
     @Transactional
     @PutMapping(path = "/api/update/{codeId}")
     public void updatePaymentCode(@PathVariable("codeId") Long codeId,

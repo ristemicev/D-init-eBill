@@ -1,3 +1,4 @@
+
 function HomePage() {
     return (<div className="container-fluid">
             <div>
@@ -26,7 +27,8 @@ function HomePage() {
                     </tbody>
                 </table>
             </div>
-        </div>)
+        </div>
+    )
 }
 
 export default HomePage

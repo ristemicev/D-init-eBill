@@ -21,6 +21,7 @@ public class UserController {
     @RequestMapping("/getUserInfo")
     @ResponseBody
     private UserInfoResponse createUserInfoResponse(@RequestBody Long id) {
+
         UserInfoResponse userInfoResponse = new UserInfoResponse();
 
         Optional<User> user = userService.getUserById(id);
