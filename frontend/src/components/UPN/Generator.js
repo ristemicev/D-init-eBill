@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import AuthContext from "../Context/AuthContext";
+import {handleLogError} from "../Helpers";
 
 
 export class Generator extends Component {
@@ -7,6 +8,15 @@ export class Generator extends Component {
     state = {
         user: [],
         codes: [],
+        upn: {
+            name: "",
+            iban: "",
+            address: "",
+            paymentCode: "",
+            description: "",
+            amount: "",
+            deadline: "",
+        }
     }
 
     static contextType = AuthContext
@@ -48,6 +58,31 @@ export class Generator extends Component {
         document.getElementById('codeDesc').value = await fetch('/api/generate/getOpis', options).then((res) => res.text())
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        const data = new FormData(event.target)
+
+        const req = {
+            name: data.get('name'),
+            iban: data.get('recipientIBAN'),
+            address: data.get('address'),
+            paymentCode: data.get('paymentCode'),
+            amount: data.get('amount'),
+            description: data.get('description'),
+            deadline: data.get('deadline')
+        }
+
+        const options = {
+            headers: {'Content-type': 'application/json'},
+            method: 'POST',
+            body: JSON.stringify(req)
+        };
+
+        console.log(req)
+        fetch('/upn/generate',options)
+    }
+
     render() {
         const {user, codes} = this.state;
         return (
@@ -56,15 +91,17 @@ export class Generator extends Component {
                     <div className="card-body">
                         <h3 className="text-center">Generate New Universal Payment Order</h3>
                         <hr></hr>
-                        <form>
+                        <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="cc_name">Recipient's name</label>
                                 <input type="text"
                                        className="form-control"
                                        id="cc_name"
                                        title="First and last name"
-                                       required="required" disabled
-                                       placeholder={user.name}
+                                       name="name"
+                                       required="required"
+                                       readOnly
+                                       value={user.name}
                                 ></input>
                             </div>
                             <div className="form-group">
@@ -80,14 +117,14 @@ export class Generator extends Component {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="cc_address">Recipient's Address</label>
+                                <label>Recipient's Address</label>
                                 <input type="text"
                                        className="form-control"
-                                       id="cc_address"
                                        title="Recipient's Address"
                                        required="required"
                                        value={user.address}
-                                       disabled></input>
+                                       name="address"
+                                       readOnly></input>
                             </div>
 
                             <div className="form-group">
