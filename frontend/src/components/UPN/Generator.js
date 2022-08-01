@@ -8,15 +8,6 @@ export class Generator extends Component {
     state = {
         user: [],
         codes: [],
-        upn: {
-            name: "",
-            iban: "",
-            address: "",
-            paymentCode: "",
-            description: "",
-            amount: "",
-            deadline: "",
-        }
     }
 
     static contextType = AuthContext
@@ -70,7 +61,8 @@ export class Generator extends Component {
             paymentCode: data.get('paymentCode'),
             amount: data.get('amount'),
             description: data.get('description'),
-            deadline: data.get('deadline')
+            deadline: data.get('deadline'),
+            reference: data.get('reference')
         }
 
         const options = {
@@ -80,7 +72,8 @@ export class Generator extends Component {
         };
 
         console.log(req)
-        fetch('/upn/generate',options)
+        window.location.href="/generate/show?data="+req
+        // fetch('/upn/generate',options)
     }
 
     render() {
@@ -150,6 +143,11 @@ export class Generator extends Component {
                                 <label>Amount</label>
                                 <input type="text" className="form-control" title="Amount"
                                        required="required" name="amount"></input>
+                            </div>
+                            <div className="form-group" id="reference">
+                                <label>Reference</label>
+                                <input type="text" className="form-control" title="Reference"
+                                       required="required" name="reference"></input>
                             </div>
                             <div className="form-group" id="deadline">
                                 <label>Deadline</label>

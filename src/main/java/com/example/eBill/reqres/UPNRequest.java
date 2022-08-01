@@ -29,4 +29,6 @@ public class UPNRequest {
     @NotBlank
     private String deadline;
 
+    @NotBlank
+    private String reference;
 }

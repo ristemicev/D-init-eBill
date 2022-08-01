@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "upn")
 public class UPN {
-
     @Id
     @SequenceGenerator(
             name = "upn_sequence",
