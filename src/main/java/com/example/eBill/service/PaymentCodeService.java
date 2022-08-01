@@ -59,4 +59,10 @@ public class PaymentCodeService {
         if(eng != null && eng.length()>0 && !Objects.equals(paymentCode.getEng(), eng))
             paymentCode.setEng(eng);
     }
+
+    public Optional<PaymentCode> findByCode(String code) {
+
+        return paymentRepository.findByCode(code);
+
+    }
 }

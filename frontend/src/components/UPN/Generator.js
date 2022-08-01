@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import AuthContext from "../Context/AuthContext";
-import upnForm from "./UpnForm";
 
 
 export class Generator extends Component {
@@ -8,7 +7,6 @@ export class Generator extends Component {
     state = {
         user: [],
         codes: [],
-        codeId: "",
     }
 
     static contextType = AuthContext
@@ -37,19 +35,21 @@ export class Generator extends Component {
         }
     }
 
-     updateKey = (e) => {
+    updateCode = async () => {
 
-         let {value} = e.target;
-         this.setState({
-              codeId: value,
+        let elt = document.getElementById('paymentCode');
 
-         });
+        const options = {
+            headers: {'Content-type': 'application/json'},
+            method: 'POST',
+            body: elt.value
+        };
 
-         console.log(value)
+        document.getElementById('codeDesc').value = await fetch('/api/generate/getOpis', options).then((res) => res.text())
     }
 
     render() {
-        const {user,codes,codeId} = this.state;
+        const {user, codes} = this.state;
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card">
@@ -89,14 +89,16 @@ export class Generator extends Component {
                                        value={user.address}
                                        disabled></input>
                             </div>
+
                             <div className="form-group">
                                 <label>Payment Code</label>
                                 <select className="form-control" autoComplete="off"
-                                        title="Payment Code" required id="paymentCode" name="paymentCode" onChange={this.updateKey}>
+                                        title="Payment Code" required id="paymentCode" name="paymentCode"
+                                        onChange={this.updateCode}>
                                     <option selected="selected">Please choose</option>
                                     {
                                         codes.map((code, ix) => (
-                                            <option key={ix+1} value={code.code}>{code.code}</option>
+                                            <option key={ix + 1} value={code.code}>{code.code}</option>
                                         ))
                                     }
                                 </select>
@@ -104,7 +106,8 @@ export class Generator extends Component {
                             <div className="form-group" id="namena">
                                 <label>Description</label>
                                 <input type="text" className="form-control" title="Payment Code"
-                                       required="required" id="tuka" name="description"></input>
+                                       required="required" name="description" id="codeDesc"
+                                       ></input>
                             </div>
                             <div className="form-group" id="amount">
                                 <label>Amount</label>
