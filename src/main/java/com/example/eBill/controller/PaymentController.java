@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PaymentController {
@@ -38,5 +39,12 @@ public class PaymentController {
                                   @RequestParam(required = false) String slo,
                                   @RequestParam(required = false) String eng){
         paymentService.updateCode(codeId, code, slo, eng);
+    }
+
+    @PostMapping("/api/generate/getOpis")
+    @ResponseBody
+    public String getOpis(@RequestBody String code) {
+
+        return paymentService.findByCode(code).get().getSlo();
     }
 }
