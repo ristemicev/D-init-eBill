@@ -4,12 +4,12 @@ import {Col, Row} from "react-bootstrap";
 
 function Footer() {
     return (
-        <footer className={ "container-fluid bg-darkcelar" }>
+        <footer className={ "container-fluid bg-darkcelar fixed-bottom" }>
             <hr/>
+            <br/>
             <Row className={"text-center"}>
                 <Col>
                     <div>
-                        <br/>
                         <span className="mb-3 mb-md-0 text-muted">R. Micev </span>
                         <div className={"text-center"}>
                             <a style={{padding: "5%"}}
@@ -26,10 +26,11 @@ function Footer() {
                             <a href={"#"}><GrLinkedin/></a>
                             <a style={{padding: "5%"}} href={"#"}><GrGithub/></a>
                         </div>
+                        <br/>
                     </div>
                 </Col>
                 <Col>
-                    <img width={"30%"} src={"/eBill.png"}/>
+                    <img width={"40%"} src={"/eBill.png"}/>
                 </Col>
                 <Col>
                     <div className={""}>    
@@ -37,6 +38,7 @@ function Footer() {
                     </div>
                 </Col>
             </Row>
+            <br/>
         </footer>
     )
 }
