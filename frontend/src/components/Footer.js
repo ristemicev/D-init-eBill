@@ -1,9 +1,8 @@
 import React from "react";
 import {GrGithub, GrInstagram, GrLinkedin} from 'react-icons/gr';
 import {Col, Row} from "react-bootstrap";
-import Img from "react-image";
 
-function Footer(){
+function Footer() {
     return (
         <footer className={ "container-fluid bg-darkcelar" }>
             <hr/>
@@ -13,7 +12,8 @@ function Footer(){
                         <br/>
                         <span className="mb-3 mb-md-0 text-muted">R. Micev </span>
                         <div className={"text-center"}>
-                            <a style={{padding: "5%"}} href={"https://www.instagram.com/micev.riste/"}><GrInstagram/></a>
+                            <a style={{padding: "5%"}}
+                               href={"https://www.instagram.com/ristemicev/"}><GrInstagram/></a>
                             <a href={"https://si.linkedin.com/in/riste-micev-a821b2205"}><GrLinkedin/></a>
                             <a style={{padding: "5%"}} href={"https://github.com/ristemicev/"}><GrGithub/></a>
                         </div>
