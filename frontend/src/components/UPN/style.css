@@ -2,6 +2,7 @@ input {
     font-size: 10pt;
 }
 .frame {
+    border: 1px solid black;
     display: flex;
     height: 99mm;
     width: 210mm;
