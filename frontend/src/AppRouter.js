@@ -8,19 +8,21 @@ import EditCodes from "./components/Admin/editCodes";
 import Upn from "./components/UPN/UpnForm";
 import Generator from "./components/UPN/Generator"
 import Register from "./components/Register";
+import {Error404} from "./components/Error";
 
 function AppRouter() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<HomePage/>}/>
-                <Route path="/home" element={<HomePage/>}/>
-                <Route path="/register" element={<Register/>}/>
-                <Route path="/admin" element={<AdminPanel/>}/>
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/admin/editCodes" element={<EditCodes/>}/>
-                <Route path="/generate/show" element={<Upn/>}/>
-                <Route path="/generate/test" element={<Generator/>}/>
+                <Route exact path="/" element={<HomePage/>}/>
+                <Route exact path="/home" element={<HomePage/>}/>
+                <Route exact path="/register" element={<Register/>}/>
+                <Route exact path="/admin" element={<AdminPanel/>}/>
+                <Route exact path="/login" element={<Login/>}/>
+                <Route exact path="/admin/editCodes" element={<EditCodes/>}/>
+                <Route exact path="/generate/show" element={<Upn/>}/>
+                <Route exact path="/generate/test" element={<Generator/>}/>
+                <Route path="*" element={<Error404/>}></Route>
             </Routes>
         </BrowserRouter>
     );

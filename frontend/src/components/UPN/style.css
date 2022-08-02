@@ -1,10 +1,12 @@
+input {
+    font-size: 10pt;
+}
 .frame {
     display: flex;
     height: 99mm;
     width: 210mm;
     margin: 10mm auto auto;
 }
-
 .potrdilo {
     width: 60mm;
     height: 100%;
@@ -39,18 +41,19 @@
 .ime {
     height: 13.5mm;
     border: 0.5mm solid rgba(255, 103, 77, 1);
-
+    width: 100%;
 }
 
 .namen {
     margin-top: 3mm;
     height: 9mm;
     border: 0.5mm solid rgba(255, 103, 77, 1);
+    width: 100%;
 }
 
 .znesek {
     margin-top: 3mm;
-    width: 40mm;
+    width: 81%;
     height: 5mm;
     border: 0.5mm solid rgba(255, 103, 77, 1);
     margin-left: 10mm;
@@ -58,6 +61,7 @@
 
 .iban {
     margin-top: 3mm;
+    width: 100%;
     height: 13.5mm;
     border: 0.5mm solid rgba(255, 103, 77, 1);
 }
@@ -134,7 +138,6 @@
     height: 15mm;
     width: 100%;
     border: 0.5mm solid rgba(255, 103, 77, 1);
-
 }
 
 .znesek2 {
@@ -383,4 +386,11 @@
     position: absolute;
     white-space: nowrap;
     left: 10px;
+}
+
+textarea {
+    overflow: hidden;
+    resize: none;
+    line-height: 100%;
+    font-size: 10pt;
 }

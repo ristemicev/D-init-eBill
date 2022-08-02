@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AuthContext from "../Context/AuthContext";
-import {handleLogError} from "../Helpers";
+import {Navigate} from "react-router-dom"
 
 
 export class Generator extends Component {
@@ -8,6 +8,8 @@ export class Generator extends Component {
     state = {
         user: [],
         codes: [],
+        upnData: [],
+        redirect: false
     }
 
     static contextType = AuthContext
@@ -49,7 +51,7 @@ export class Generator extends Component {
         document.getElementById('codeDesc').value = await fetch('/api/generate/getOpis', options).then((res) => res.text())
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
         const data = new FormData(event.target)
@@ -58,6 +60,7 @@ export class Generator extends Component {
             name: data.get('name'),
             iban: data.get('recipientIBAN'),
             address: data.get('address'),
+            city: data.get('city'),
             paymentCode: data.get('paymentCode'),
             amount: data.get('amount'),
             description: data.get('description'),
@@ -65,19 +68,29 @@ export class Generator extends Component {
             reference: data.get('reference')
         }
 
+        this.setState({upnData: req})
+
         const options = {
             headers: {'Content-type': 'application/json'},
             method: 'POST',
             body: JSON.stringify(req)
         };
 
-        console.log(req)
-        window.location.href="/generate/show?data="+req
-        // fetch('/upn/generate',options)
+        const response = await fetch('/upn/generate', options).then((res) => res.text())
+
+
+        Object.assign(req,{path:response})
+
+
+        this.setState({redirect: true})
+
     }
 
     render() {
-        const {user, codes} = this.state;
+        const {user, codes, upnData, redirect} = this.state;
+        if (redirect) {
+            return <Navigate to="/generate/show" state={upnData}/>
+        }
         return (
             <div className="col-md-6 offset-md-3">
                 <div className="card">
@@ -119,7 +132,16 @@ export class Generator extends Component {
                                        name="address"
                                        readOnly></input>
                             </div>
-
+                            <div className="form-group">
+                                <label>Recipient's City</label>
+                                <input type="text"
+                                       className="form-control"
+                                       title="Recipient's City"
+                                       required="required"
+                                       value={user.city}
+                                       name="city"
+                                       readOnly></input>
+                            </div>
                             <div className="form-group">
                                 <label>Payment Code</label>
                                 <select className="form-control" autoComplete="off"
