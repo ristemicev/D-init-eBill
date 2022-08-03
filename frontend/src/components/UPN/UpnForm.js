@@ -45,7 +45,7 @@ export function Upn() {
                             <div className="objekt">
                                 <label className="label">Koda QR</label>
                                 <div className="qrCode">
-                                    <img src={state.path}/>
+                                    <img src={"/uploads/" + state.path}/>
                                 </div>
                             </div>
                             <div className="desno">

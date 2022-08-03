@@ -10,12 +10,11 @@ import java.util.Objects;
 
 public class QRCodeGenerator {
 
-    public static String generateQR(String string, String name) throws IOException {
+    public static void generateQR(String string, String name) throws IOException {
         QrCode qr0 = QrCode.encodeText(string, QrCode.Ecc.HIGH);
         BufferedImage img = toImage(qr0);
-        String path = "uploads/qr-"+ name +".png";
+        String path = "uploads/qr-" + name +".png";
         ImageIO.write(img, "png", new File(path));
-        return path;
     }
     private static BufferedImage toImage(QrCode qr) {
         Objects.requireNonNull(qr);

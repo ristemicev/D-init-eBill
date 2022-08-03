@@ -33,7 +33,9 @@ public class UPNController {
 
         upnService.saveUPN(upn);
 
-        return QRCodeGenerator.generateQR(upn.toString(),upn.getUniCode());
+        QRCodeGenerator.generateQR(upn.toString(),upn.getUniCode());
+
+        return upn.getUniCode() + ".png";
     }
 
     private Uplatnica createUPN(UPNRequest upnRequest) {
