@@ -12,7 +12,7 @@ import java.util.Objects;
 public class QRCodeGenerator {
 
     public static void generateQR(String string, String name) throws IOException {
-        QrCode qr0 = QrCode.encodeText(string, QrCode.Ecc.MEDIUM);
+        QrCode qr0 = QrCode.encodeText(string, QrCode.Ecc.HIGH);
         BufferedImage img = toImage(qr0, 2, 3, 0xFFFFFF, 0x000000);  // See QrCodeGeneratorDemo
         String path = "uploads/qr-" + name +".png";
         ImageIO.write(img, "png", new File(path));

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AuthContext from "../Context/AuthContext";
 import {Navigate} from "react-router-dom"
+import {formatIban} from "../Helpers";
 
 
 export class Generator extends Component {
@@ -117,7 +118,7 @@ export class Generator extends Component {
                                         title="Recipient's IBAN" required name="recipientIBAN">
                                     {
                                         user.accounts?.map((acc, ix) => (
-                                            <option key={ix} value={acc.number}>{acc.number}</option>
+                                            <option key={ix} value={acc.number}>{formatIban(acc.number)}</option>
                                         ))
                                     }
                                 </select>
@@ -147,7 +148,7 @@ export class Generator extends Component {
                                 <select className="form-control" autoComplete="off"
                                         title="Payment Code" required id="paymentCode" name="paymentCode"
                                         onChange={this.updateCode}>
-                                    <option selected="selected">Please choose</option>
+                                    <option defaultValue="">Please choose</option>
                                     {
                                         codes.map((code, ix) => (
                                             <option key={ix + 1} value={code.code}>{code.code}</option>

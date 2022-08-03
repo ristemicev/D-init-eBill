@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import './style.css'
 import {useLocation} from "react-router-dom";
 import { format } from 'date-fns'
+import {formatAmount, formatIban} from "../Helpers";
 
 
 export function Upn() {
     const {state} = useLocation();
-
 
     const [img, setImg] = useState();
     const fetchImage = async () => {
@@ -42,12 +42,12 @@ export function Upn() {
                             <label className="eur">EUR</label>
                         </div>
                         <label className="label3">Znesek</label>
-                        <input className="znesek" value={state.amount}></input>
+                        <input className="znesek" value={formatAmount(state.amount)}></input>
                     </div>
                     <div className="objekt">
                         <label className="label2">IBAN in referenca prejemnika</label>
                         <textarea spellCheck="false" className="iban"
-                                  value={state.iban + "\n" + state.reference}></textarea>
+                                  value={formatIban(state.iban) + "\n" + state.reference}></textarea>
                     </div>
                     <div className="objekt">
                         <label className="label2">Ime prejemnika</label>
@@ -89,7 +89,7 @@ export function Upn() {
                                     <div className="objekt">
                                         <label className="eur2">EUR</label>
                                     </div>
-                                    <input className="znesek2" value={state.amount}></input>
+                                    <input className="znesek2" value={formatAmount(state.amount)}></input>
                                     <label className="labelDatum">Datum plačila</label>
                                     <input className="datumPlacila"></input>
                                     <label className="labelNujno">Nujno</label>
@@ -115,7 +115,7 @@ export function Upn() {
                     <div className="fieldsPrejemnik">
                         <div className="redica">
                             <label className="label">IBAN prejemnika</label>
-                            <input className="ibanPrejemnika" value={state.iban} readOnly></input>
+                            <input className="ibanPrejemnika" value={formatIban(state.iban)} readOnly></input>
                             <div className="objekt">
                                 <label className="upnQR">UPN QR</label>
                             </div>
