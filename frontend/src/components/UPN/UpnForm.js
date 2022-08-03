@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './style.css'
 import {useLocation} from "react-router-dom";
+import { format } from 'date-fns'
+
 
 export function Upn() {
-
     const {state} = useLocation();
+
+
+    const [img, setImg] = useState();
+    const fetchImage = async () => {
+        const res = await fetch("getImage/" + state.path);
+        const imageBlob = await res.blob();
+        const imageObjectURL = URL.createObjectURL(imageBlob);
+        setImg(imageObjectURL);
+    };
+
+    useEffect(() => {
+        fetchImage();
+    }, []);
+
 
     return (
         <div className="frame">
@@ -19,7 +34,8 @@ export function Upn() {
                     </div>
                     <div className="objekt">
                         <label className="label2">Namen in rok plačila</label>
-                        <textarea spellCheck="false" className="namen" value={state.description + "\n" + state.deadline}></textarea>
+                        <textarea spellCheck="false" className="namen"
+                                  value={state.description}></textarea>
                     </div>
                     <div className="objekt">
                         <div className="objekt">
@@ -30,11 +46,13 @@ export function Upn() {
                     </div>
                     <div className="objekt">
                         <label className="label2">IBAN in referenca prejemnika</label>
-                        <textarea spellCheck="false" className="iban" value={state.iban + "\n" + state.reference}></textarea>
+                        <textarea spellCheck="false" className="iban"
+                                  value={state.iban + "\n" + state.reference}></textarea>
                     </div>
                     <div className="objekt">
                         <label className="label2">Ime prejemnika</label>
-                        <textarea spellCheck="false" className="iban" value={state.name + "\n" + state.address + "\n" + state.city }></textarea>
+                        <textarea spellCheck="false" className="iban"
+                                  value={state.name + "\n" + state.address + "\n" + state.city}></textarea>
                     </div>
                 </div>
             </div>
@@ -44,8 +62,8 @@ export function Upn() {
                         <div className="redica">
                             <div className="objekt">
                                 <label className="label">Koda QR</label>
-                                <div className="qrCode">
-                                    <img src={"/uploads/" + state.path}/>
+                                <div className="qrCode text-center">
+                                    <img src={img}/>
                                 </div>
                             </div>
                             <div className="desno">
@@ -88,7 +106,7 @@ export function Upn() {
                             </div>
                             <div className="objekt">
                                 <label className="labelObjekt">Rok plačila</label>
-                                <input className="rokPlacila" value={state.deadline}></input>
+                                <input className="rokPlacila" value={format(new Date (state.deadline),'MM.dd.yyyy')}></input>
                             </div>
                         </div>
                     </div>
@@ -111,7 +129,8 @@ export function Upn() {
                                 </div>
                                 <div className="redica">
                                     <label className="label2">Ime, ulica in kraj prejemnika</label>
-                                    <textarea spellCheck="false" className="imeAdresa" value={state.name + "\n" + state.address + "\n" + state.city }></textarea>
+                                    <textarea spellCheck="false" className="imeAdresa"
+                                              value={state.name + "\n" + state.address + "\n" + state.city}></textarea>
                                 </div>
                             </div>
                             <div className="podpis">
