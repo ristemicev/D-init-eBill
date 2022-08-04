@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -26,14 +27,23 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors().and().csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/login", "/register","/auth/authenticate").permitAll()
+                .antMatchers("/admin").hasAnyAuthority("ADMIN")
+                .antMatchers("/","/home","/generate/test ").hasAnyAuthority("USER","ADMIN");
+        http.formLogin().loginPage("/login")
+                .defaultSuccessUrl("/")
+                .and().logout();
+
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+        //return NoOpPasswordEncoder.getInstance();
     }
 
 
