@@ -1,6 +1,9 @@
-
 function HomePage() {
-    return (<div className="container-fluid">
+
+    const user = JSON.parse(sessionStorage.getItem('user'))
+
+    return (
+        <div className="container-fluid">
             <div>
                 <table style={{height: 600, tableLayout: "fixed"}} className="container-fluid text-center">
                     <tbody>
@@ -30,5 +33,6 @@ function HomePage() {
         </div>
     )
 }
+
 
 export default HomePage

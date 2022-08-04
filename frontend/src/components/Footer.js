@@ -4,7 +4,7 @@ import {Col, Row} from "react-bootstrap";
 
 function Footer() {
     return (
-        <footer className={ "container-fluid bg-darkcelar" }>
+        <footer className={ "container-fluid" }>
             <hr/>
             <br/>
             <Row className={"text-center"}>
