@@ -38,7 +38,7 @@ function NavBar() {
                     <ul className="navbar-nav ms-auto">
                         {
                             userIsAuthenticated() === true ? <li className="nav-item">
-                                    <a className="nav-link" onClick={logout}>Logout</a>
+                                    <a href="/" className="nav-link" onClick={logout}>Logout</a>
                                 </li> :
                                 (
                                     <>

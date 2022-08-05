@@ -12,4 +12,5 @@ public interface IBANService {
 
     void deleteIBAN(IBAN iban);
 
+    boolean existsByNumber(String number);
 }

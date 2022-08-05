@@ -13,4 +13,6 @@ public interface IBANRepo extends JpaRepository<IBAN,Long> {
 
     IBAN findById(IBAN x);
 
+    boolean existsByNumber(String number);
+
 }
