@@ -173,10 +173,10 @@ export class Register extends Component {
                                    const key = e.key;
 
                                    if(key === "Backspace")
-                                       if(len === 5 || len === 10 || len === 15 || len === 20 || len === 25 || len === 30)
+                                       if(len === 5 || len === 10 || len === 15 || len === 20 || len === 25 || len === 30 || len === 35 || len === 40)
                                            e.target.value=val.slice(0,-1)
                                        else e.target.value=val
-                                   else if(len === 4 || len === 9 || len === 14 || len === 19 || len === 24 || len === 29)
+                                   else if(len === 4 || len === 9 || len === 14 || len === 19 || len === 24 || len === 29 || len === 34 || len === 39)
                                        e.target.value=(val + " ")
                                    else e.target.value=val
                                 }}
