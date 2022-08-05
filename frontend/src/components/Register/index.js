@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {handleLogError} from "../Helpers";
 import AuthContext from "../Context/AuthContext";
+import {isValidIBAN} from "ibantools";
 
 export class Register extends Component {
 
@@ -40,12 +41,22 @@ export class Register extends Component {
         e.preventDefault()
 
         const {username, password, name, email, street, streetNumber, city, cityCode, iban} = this.state
+
+
         if (!(username && password && name && email && street && streetNumber && city && cityCode && iban)) {
             this.setState({
                 isError: true,
                 errorMessage: 'Please, inform all fields!'
             })
             return
+        }
+
+        if(!isValidIBAN(iban)){
+            this.setState({
+                isError: true,
+                errorMessage: "Iban is invalid"
+            })
+            return;
         }
 
         const user = {username, password, name, email, street, streetNumber, city, cityCode,iban}
@@ -76,7 +87,6 @@ export class Register extends Component {
                 }
             })
     }
-
 
     render() {
         const {isLoggedIn, isError, errorMessage} = this.state
