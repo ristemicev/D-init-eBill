@@ -167,6 +167,19 @@ export class Register extends Component {
                         <input type="text" className="form-control" placeholder="IBAN Number" name="iban"
                                onChange={this.handleInputChange}
                                value={this.state.iban}
+                               onKeyUp={e => {
+                                   let val = e.target.value;
+                                   const len = val.length;
+                                   const key = e.key;
+
+                                   if(key === "Backspace")
+                                       if(len === 5 || len === 10 || len === 15 || len === 20 || len === 25 || len === 30)
+                                           e.target.value=val.slice(0,-1)
+                                       else e.target.value=val
+                                   else if(len === 4 || len === 9 || len === 14 || len === 19 || len === 24 || len === 29)
+                                       e.target.value=(val + " ")
+                                   else e.target.value=val
+                                }}
                         />
                     </div>
                     <div className="d-grid">
