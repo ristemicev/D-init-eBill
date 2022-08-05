@@ -21,7 +21,7 @@ function AppRouter() {
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/admin/editCodes" element={<EditCodes/>}/>
                 <Route exact path="/generate/show" element={<Upn/>}/>
-                <Route exact path="/generate/test" element={<Generator/>}/>
+                <Route exact path="/generate/" element={<Generator/>}/>
                 <Route path="*" element={<Error404/>}></Route>
             </Routes>
         </BrowserRouter>

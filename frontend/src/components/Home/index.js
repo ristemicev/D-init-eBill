@@ -23,7 +23,10 @@ function HomePage() {
                         </td>
                         <td className="align-middle">
                             <button type="button"
-                                    className="btn btn-secondary h-50 w-50">Generate New UPN
+                                    className="btn btn-secondary h-50 w-50"  onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href = '/generate';
+                            }}>Generate New UPN
                             </button>
                         </td>
                     </tr>

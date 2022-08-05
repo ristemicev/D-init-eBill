@@ -170,7 +170,7 @@ export class Generator extends Component {
                             <div className="form-group" id="reference">
                                 <label>Reference</label>
                                 <input type="text" className="form-control" title="Reference"
-                                       required="required" name="reference"></input>
+                                       name="reference"></input>
                             </div>
                             <div className="form-group" id="deadline">
                                 <label>Deadline</label>
