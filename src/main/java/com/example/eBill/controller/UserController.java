@@ -27,8 +27,10 @@ public class UserController {
         Optional<User> user = userService.getUserById(id);
 
         userInfoResponse.setName(user.get().getName());
-        userInfoResponse.setAddress(user.get().getStreet() + " " +  user.get().getStreetNumber());
-        userInfoResponse.setCity(user.get().getCityCode() + " " + user.get().getCity());
+        userInfoResponse.setStreet(user.get().getStreet());
+        userInfoResponse.setStreetNumber(user.get().getStreetNumber());
+        userInfoResponse.setCity(user.get().getCity());
+        userInfoResponse.setCityCode(user.get().getCityCode());
         userInfoResponse.setAccounts(user.get().getAccounts());
         return userInfoResponse;
 

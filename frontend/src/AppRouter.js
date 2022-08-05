@@ -9,6 +9,8 @@ import Upn from "./components/UPN/UpnForm";
 import Generator from "./components/UPN/Generator"
 import Register from "./components/Register";
 import {Error404} from "./components/Error";
+import Profile from "./components/Profile";
+import ProfilePage from "./components/Profile";
 
 function AppRouter() {
     return (
@@ -22,6 +24,7 @@ function AppRouter() {
                 <Route exact path="/admin/editCodes" element={<EditCodes/>}/>
                 <Route exact path="/generate/show" element={<Upn/>}/>
                 <Route exact path="/generate/" element={<Generator/>}/>
+                <Route exact path="/profile" element={<ProfilePage/>}/>
                 <Route path="*" element={<Error404/>}></Route>
             </Routes>
         </BrowserRouter>

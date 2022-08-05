@@ -3,7 +3,7 @@ import {useAuth} from "./Context/AuthContext";
 
 function NavBar() {
 
-    const {getUser, userIsAuthenticated, userLogout} = useAuth()
+    const {userIsAuthenticated, userLogout} = useAuth()
 
     const logout = () => {
         userLogout()
@@ -23,12 +23,17 @@ function NavBar() {
                         <li className="nav-item">
                             <a className="nav-link" href="/">Home</a>
                         </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/profile">Profile</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/generate">Generate</a>
-                        </li>
+                        {
+                            userIsAuthenticated() === true ?
+                                <>
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="/profile">Profile</a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a className="nav-link" href="/generate">Generate</a>
+                                    </li>
+                                </> : null
+                        }
                     </ul>
                     <ul className="navbar-nav ms-auto">
                         {

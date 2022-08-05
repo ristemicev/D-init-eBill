@@ -9,8 +9,10 @@ import java.util.ArrayList;
 public class UserInfoResponse {
 
     private String name;
-    private String address;
+    private String street;
+    private String streetNumber;
     private String city;
+    private String cityCode;
     private ArrayList<IBAN> accounts;
 
 }

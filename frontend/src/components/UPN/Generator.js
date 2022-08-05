@@ -129,7 +129,7 @@ export class Generator extends Component {
                                        className="form-control"
                                        title="Recipient's Address"
                                        required="required"
-                                       value={user.address}
+                                       value={user.street + " " + user.streetNumber}
                                        name="address"
                                        readOnly></input>
                             </div>
@@ -139,7 +139,7 @@ export class Generator extends Component {
                                        className="form-control"
                                        title="Recipient's City"
                                        required="required"
-                                       value={user.city}
+                                       value={user.cityCode + " " + user.city}
                                        name="city"
                                        readOnly></input>
                             </div>
