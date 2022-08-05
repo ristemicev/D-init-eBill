@@ -47,7 +47,7 @@ public class AuthController {
 
     private User createUser(SignUpRequest signUpRequest) {
         User user = new User();
-        IBAN iban = new IBAN(signUpRequest.getIban());
+        IBAN iban = new IBAN(signUpRequest.getIban().replaceAll(" ",""));
         ibanService.saveIBAN(iban);
         user.setUsername(signUpRequest.getUsername());
         user.setPassword(signUpRequest.getPassword());

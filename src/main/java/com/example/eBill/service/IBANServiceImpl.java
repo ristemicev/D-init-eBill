@@ -26,4 +26,9 @@ public class IBANServiceImpl implements IBANService{
     public void deleteIBAN(IBAN iban) {
         ibanRepo.delete(iban);
     }
+
+    @Override
+    public boolean existsByNumber(String number) {
+        return ibanRepo.existsByNumber(number);
+    }
 }
