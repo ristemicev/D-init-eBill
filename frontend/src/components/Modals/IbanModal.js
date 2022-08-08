@@ -1,9 +1,13 @@
 import Modal from 'react-bootstrap/Modal';
 import {useAuth} from "../Context/AuthContext";
+import {isValidIBAN} from "ibantools";
+import React, {useState} from "react";
+
 
 function IbanModel(props) {
 
     const {getUser} = useAuth();
+    const [errorMessage,setErrorMessage] = useState();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -15,17 +19,27 @@ function IbanModel(props) {
             id: data.get('id'),
         }
 
-        const options = {
-            headers: {'Content-type': 'application/json'},
-            method: 'POST',
-            body: JSON.stringify(req)
-        };
+        if(!isValidIBAN(req.number)){
+            setErrorMessage(
+                "Iban is invalid"
+            )
+            document.getElementById("greski").hidden =false
 
-        const response = await fetch('/user/addIban', options).then((res) => res.text())
+            return;
+        } else {
 
+            const options = {
+                headers: {'Content-type': 'application/json'},
+                method: 'POST',
+                body: JSON.stringify(req)
+            };
 
-        alert(response)
-        window.location.reload()
+            const response = await fetch('/user/addIban', options).then((res) => res.text())
+
+            alert(response)
+            window.location.reload()
+        }
+
     };
 
     return (
@@ -42,6 +56,7 @@ function IbanModel(props) {
             <Modal.Body>
                 <form onSubmit={handleSubmit} id="ibanForm">
                     <input name="id" hidden value={getUser().id} readOnly/>
+                    <div className="container alert-danger mb-3 p-2" id="greski" hidden>{errorMessage}</div>
                     <input maxLength="42" minLength="16" className={"form-control"} required name="number"
                            placeholder={"Number"}
                            onKeyUp={e => {
