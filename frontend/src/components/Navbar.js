@@ -3,7 +3,7 @@ import {useAuth} from "./Context/AuthContext";
 
 function NavBar() {
 
-    const {userIsAuthenticated, userLogout} = useAuth()
+    const {getUser, userIsAuthenticated, userLogout} = useAuth()
 
     const logout = () => {
         userLogout()
@@ -26,6 +26,11 @@ function NavBar() {
                         {
                             userIsAuthenticated() === true ?
                                 <>
+                                    {getUser().role === "ADMIN" ? <>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="/admin">Admin Panel</a>
+                                        </li>
+                                    </> : null}
                                     <li className="nav-item">
                                         <a className="nav-link" href="/profile">Profile</a>
                                     </li>
