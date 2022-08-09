@@ -6,9 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -27,15 +25,13 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.cors().and().csrf().disable();
-        http.authorizeRequests()
-                .antMatchers("/login", "/register","/auth/authenticate").permitAll()
-                .antMatchers("/admin").hasAnyAuthority("ADMIN")
-                .antMatchers("/","/home","/generate/test ").hasAnyAuthority("USER","ADMIN");
-        http.formLogin().loginPage("/login")
-                .defaultSuccessUrl("/")
-                .and().logout();
+        http.authorizeRequests().antMatchers("/", "/home", "/login", "/register").permitAll();
+//                .antMatchers("/admin").hasAnyAuthority("ADMIN")
+//                .antMatchers("/","/home","/generate/test ").hasAnyAuthority("USER","ADMIN");
+//        http.formLogin().loginPage("/login")
+//                .defaultSuccessUrl("/")
+//                .and().logout();
 
         return http.build();
     }
@@ -43,8 +39,5 @@ public class WebSecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-        //return NoOpPasswordEncoder.getInstance();
     }
-
-
 }

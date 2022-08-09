@@ -22,9 +22,6 @@ public class PaymentCode {
     private String slo;
     private String eng;
 
-    @OneToMany(mappedBy = "paymentCode")
-    private Set<UPN> orders = new HashSet<>();
-
     public PaymentCode(String code, String slo, String eng) {
 
         this.code = code;
