@@ -33,7 +33,7 @@ public class UPNController {
 
         upnService.saveUPN(upn);
 
-        QRCodeGenerator.generateQR(upn.toString(),upn.getUniCode());
+        QRCodeGenerator.generateQR(upn.toString(), upn.getUniCode());
 
         return upn.getUniCode() + ".png";
     }
@@ -56,6 +56,4 @@ public class UPNController {
     private String generateString() {
         return UUID.randomUUID().toString();
     }
-
-
 }

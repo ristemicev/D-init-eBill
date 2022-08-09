@@ -11,4 +11,9 @@ public interface UPNService {
     Uplatnica saveUPN(Uplatnica uplatnica);
 
     void deleteUPN();
+
+    Uplatnica findByUnicode(String unicode);
+
+    boolean existsUpn(String unicode);
+
 }

@@ -24,9 +24,12 @@ public class UPNServiceImpl implements UPNService{
         return  upnRepo.save(uplatnica);
     }
 
+    @Override
     public Uplatnica findByUnicode(String unicode) {
         return upnRepo.findByUniCode(unicode);
     }
+    @Override
+    public boolean existsUpn(String unicode) {return upnRepo.existsByUniCode(unicode);}
 
     @Override
     public void deleteUPN() {

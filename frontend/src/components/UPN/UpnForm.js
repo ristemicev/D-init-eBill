@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './style.css'
 import {useLocation} from "react-router-dom";
 import {format} from 'date-fns'
-import {formatAmount, formatIban} from "../Helpers";
+import {divideReference, formatAmount, formatIban} from "../Helpers";
 
 
 export function Upn() {
@@ -40,24 +40,24 @@ export function Upn() {
                         <div className="objekt">
                             <label className="label2">Namen in rok plačila</label>
                             <textarea spellCheck="false" className="namen"
-                                      value={state.description}></textarea>
+                                      value={state.description} readOnly></textarea>
                         </div>
                         <div className="objekt">
                             <div className="objekt">
                                 <label className="eur">EUR</label>
                             </div>
                             <label className="label3">Znesek</label>
-                            <input className="znesek" value={formatAmount(state.amount)}></input>
+                            <input className="znesek" value={formatAmount(state.amount)} readOnly></input>
                         </div>
                         <div className="objekt">
                             <label className="label2">IBAN in referenca prejemnika</label>
                             <textarea spellCheck="false" className="iban"
-                                      value={formatIban(state.iban) + "\n" + state.reference}></textarea>
+                                      value={formatIban(state.iban) + "\n" + state.reference} readOnly></textarea>
                         </div>
                         <div className="objekt">
                             <label className="label2">Ime prejemnika</label>
                             <textarea spellCheck="false" className="iban"
-                                      value={state.name + "\n" + state.address + "\n" + state.city}></textarea>
+                                      value={state.name + "\n" + state.address + "\n" + state.city} readOnly></textarea>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ export function Upn() {
                                         <div className="objekt">
                                             <label className="eur2">EUR</label>
                                         </div>
-                                        <input className="znesek2" value={formatAmount(state.amount)}></input>
+                                        <input className="znesek2" value={formatAmount(state.amount)} readOnly></input>
                                         <label className="labelDatum">Datum plačila</label>
                                         <input className="datumPlacila"></input>
                                         <label className="labelNujno">Nujno</label>
@@ -107,12 +107,12 @@ export function Upn() {
                                 <input className="kodaNamena" value={state.paymentCode} readOnly></input>
                                 <div className="objekt">
                                     <label className="labelObjekt">Namen plačila</label>
-                                    <input className="namenPlacila" value={state.description}></input>
+                                    <input className="namenPlacila" value={state.description} readOnly></input>
                                 </div>
                                 <div className="objekt">
                                     <label className="labelObjekt">Rok plačila</label>
                                     <input className="rokPlacila"
-                                           value={format(new Date(state.deadline), 'MM.dd.yyyy')}></input>
+                                           value={format(new Date(state.deadline), 'dd.MM.yyyy')} readOnly></input>
                                 </div>
                             </div>
                         </div>
@@ -130,13 +130,13 @@ export function Upn() {
                                 <div className="levo">
                                     <div className="redica">
                                         <label className="label2">Referenca prejemnika</label>
-                                        <input className="referencaKod"></input>
-                                        <input className="referenca" value={state.reference} readOnly></input>
+                                        <input className="referencaKod" value={divideReference(state.reference)[0]} readOnly></input>
+                                        <input className="referenca" value={divideReference(state.reference)[1]} readOnly></input>
                                     </div>
                                     <div className="redica">
                                         <label className="label2">Ime, ulica in kraj prejemnika</label>
                                         <textarea spellCheck="false" className="imeAdresa"
-                                                  value={state.name + "\n" + state.address + "\n" + state.city}></textarea>
+                                                  value={state.name + "\n" + state.address + "\n" + state.city} readOnly></textarea>
                                     </div>
                                 </div>
                                 <div className="podpis">
@@ -149,12 +149,6 @@ export function Upn() {
                     </div>
                 </div>
             </div>
-            <button type="submit"
-                    className="btn btn-success btn-lg btn-block">Save as PDF
-            </button>
-
-            <div id="editor"></div>
-
         </div>
 
     );

@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UPNRepo extends JpaRepository<Uplatnica,Long> {
 
-    Uplatnica findByUniCode(String uniCode);
+    Uplatnica findByUniCode(String unicode);
+
+    boolean existsByUniCode(String unicode);
 }

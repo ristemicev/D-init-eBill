@@ -15,3 +15,7 @@ export const formatIban = (iban) =>{
 export const formatAmount = (amount) => {
     return amount.substring(0,amount.length-2) + "," + amount.substring(amount.length-2)
 }
+
+export const divideReference = (reference) => {
+    return [reference.substring(0,4),reference.substring(4,reference.length)]
+}
