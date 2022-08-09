@@ -30,7 +30,7 @@ function Footer() {
                     </div>
                 </Col>
                 <Col>
-                    <img width={"40%"} src={"/eBill.png"}/>
+                    <img width={"20%"} src={"/eBill.png"}/>
                 </Col>
                 <Col>
                     <div className={""}>    

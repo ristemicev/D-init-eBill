@@ -83,41 +83,52 @@ class Login extends Component {
 
         const {isLoggedIn, isError} = this.state
         if (isLoggedIn) {
-            return <Navigate to='/home'/>
+            return <Navigate to='/profile'/>
         } else {
             return (
-                <div className="container-sm">
-                    <form onSubmit={this.handleSubmit}>
-                        <h3>Sign In</h3>
-                        <div className="mb-3">
-                            <label>Username</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Enter username"
-                                name="username"
-                                onChange={this.handleInputChange}
-                                value={this.state.username}
-                            />
+                <>
+                    <header className="bg-dark py-2">
+                        <div className="container px-4 px-lg-5 my-5">
+                            <div className="text-center text-white">
+                                <h3 className="display-6 fw-bolder">Login</h3>
+                            </div>
                         </div>
-                        <div className="mb-3">
-                            <label>Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Enter password"
-                                name="password"
-                                onChange={this.handleInputChange}
-                                value={this.state.password}
-                            />
-                        </div>
-                        <div className="d-grid">
-                            <button type="submit" className="btn btn-primary">
-                                Submit
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    </header>
+                    <div className="container p-5 col-md-7 col-md-4">
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="mb-3">
+                                <label>Username</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter username"
+                                    name="username"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.username}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <label>Password</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    placeholder="Enter password"
+                                    name="password"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.password}
+                                />
+                            </div>
+                            <div className="text-center">
+                                <button type="submit" className="btn btn-primary">
+                                    Submit
+                                </button>
+                                <p className="mt-3">
+                                    Don't have an account? <a href="/login"> Register now!</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </>
             );
         }
     }

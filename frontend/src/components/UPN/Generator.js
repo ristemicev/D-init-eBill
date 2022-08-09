@@ -80,7 +80,7 @@ export class Generator extends Component {
         const response = await fetch('/upn/generate', options).then((res) => res.text())
 
 
-        Object.assign(req,{path:response})
+        Object.assign(req, {path: response})
 
 
         this.setState({redirect: true})
@@ -93,102 +93,106 @@ export class Generator extends Component {
             return <Navigate to="/generate/show" state={upnData}/>
         }
         return (
-            <div className="col-md-6 offset-md-3">
+            <div className="col-md-6 offset-md-3 p-2 mt-5">
                 <div className="card">
                     <div className="card-body">
                         <h3 className="text-center">Generate New Universal Payment Order</h3>
                         <hr></hr>
                         <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="cc_name">Recipient's name</label>
-                                <input type="text"
-                                       className="form-control"
-                                       id="cc_name"
-                                       title="First and last name"
-                                       name="name"
-                                       required="required"
-                                       readOnly
-                                       value={user.name}
-                                ></input>
+                            <div className="row">
+                                <div className="form-group">
+                                    <label htmlFor="cc_name">Recipient's name</label>
+                                    <input type="text"
+                                           className="form-control"
+                                           id="cc_name"
+                                           title="First and last name"
+                                           name="name"
+                                           required="required"
+                                           readOnly
+                                           value={user.name}
+                                    ></input>
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <label>Recipient IBAN</label>
-                                <select className="form-control"
-                                        autoComplete="off"
-                                        title="Recipient's IBAN" required name="recipientIBAN">
-                                    {
-                                        user.accounts?.map((acc, ix) => (
-                                            <option key={ix} value={acc.number}>{formatIban(acc.number)}</option>
-                                        ))
-                                    }
-                                </select>
+                            <div className="row">
+                                <div className="col form-group">
+                                    <label>Recipient's Address</label>
+                                    <input type="text"
+                                           className="form-control"
+                                           title="Recipient's Address"
+                                           required="required"
+                                           value={user.street + " " + user.streetNumber}
+                                           name="address"
+                                           readOnly></input>
+                                </div>
+                                <div className="col form-group">
+                                    <label>Recipient's City</label>
+                                    <input type="text"
+                                           className="form-control"
+                                           title="Recipient's City"
+                                           required="required"
+                                           value={user.cityCode + " " + user.city}
+                                           name="city"
+                                           readOnly></input>
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <label>Recipient's Address</label>
-                                <input type="text"
-                                       className="form-control"
-                                       title="Recipient's Address"
-                                       required="required"
-                                       value={user.street + " " + user.streetNumber}
-                                       name="address"
-                                       readOnly></input>
+                            <div className="row">
+                                <div className="form-group">
+                                    <label>Recipient IBAN</label>
+                                    <select className="form-control"
+                                            autoComplete="off"
+                                            title="Recipient's IBAN" required name="recipientIBAN">
+                                        {
+                                            user.accounts?.map((acc, ix) => (
+                                                <option key={ix} value={acc.number}>{formatIban(acc.number)}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <label>Recipient's City</label>
-                                <input type="text"
-                                       className="form-control"
-                                       title="Recipient's City"
-                                       required="required"
-                                       value={user.cityCode + " " + user.city}
-                                       name="city"
-                                       readOnly></input>
+                            <div className="row">
+                                <div className="col form-group">
+                                    <label>Payment Code</label>
+                                    <select className="form-control" autoComplete="off"
+                                            title="Payment Code" required id="paymentCode" name="paymentCode"
+                                            onChange={this.updateCode}>
+                                        <option defaultValue="">Please choose</option>
+                                        {
+                                            codes.map((code, ix) => (
+                                                <option key={ix + 1} value={code.code}>{code.code}</option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div className="col form-group" id="namena">
+                                    <label>Description</label>
+                                    <input type="text" className="form-control" title="Payment Code"
+                                           required="required" name="description" id="codeDesc"
+                                    ></input>
+                                </div>
                             </div>
-                            <div className="form-group">
-                                <label>Payment Code</label>
-                                <select className="form-control" autoComplete="off"
-                                        title="Payment Code" required id="paymentCode" name="paymentCode"
-                                        onChange={this.updateCode}>
-                                    <option defaultValue="">Please choose</option>
-                                    {
-                                        codes.map((code, ix) => (
-                                            <option key={ix + 1} value={code.code}>{code.code}</option>
-                                        ))
-                                    }
-                                </select>
+                            <div className="row">
+                                <div className="col form-group" id="amount">
+                                    <label>Amount</label>
+                                    <input type="text" className="form-control" title="Amount"
+                                           required="required" name="amount"></input>
+                                </div>
+                                <div className="col form-group" id="reference">
+                                    <label>Reference</label>
+                                    <input type="text" className="form-control" title="Reference"
+                                           name="reference"></input>
+                                </div>
                             </div>
-                            <div className="form-group" id="namena">
-                                <label>Description</label>
-                                <input type="text" className="form-control" title="Payment Code"
-                                       required="required" name="description" id="codeDesc"
-                                       ></input>
-                            </div>
-                            <div className="form-group" id="amount">
-                                <label>Amount</label>
-                                <input type="text" className="form-control" title="Amount"
-                                       required="required" name="amount"></input>
-                            </div>
-                            <div className="form-group" id="reference">
-                                <label>Reference</label>
-                                <input type="text" className="form-control" title="Reference"
-                                       name="reference"></input>
-                            </div>
+
                             <div className="form-group" id="deadline">
                                 <label>Deadline</label>
                                 <input type="date" className="form-control" title="Deadline"
                                        required="required" name="deadline"></input>
                             </div>
                             <hr></hr>
-                            <div className="form-group row">
-                                <div className="col-md-6">
-                                    <button type="reset"
-                                            className="btn btn-danger btn-lg btn-block">Cancel
-                                    </button>
-                                </div>
-                                <div className="col-md-6">
-                                    <button type="submit"
-                                            className="btn btn-success btn-lg btn-block">Generate
-                                    </button>
-                                </div>
+                            <div className="text-center">
+                                <button type="submit"
+                                        className="btn btn-success btn-lg btn-block">Generate
+                                </button>
                             </div>
                         </form>
                     </div>

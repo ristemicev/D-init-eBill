@@ -51,7 +51,7 @@ export class Register extends Component {
             return
         }
 
-        if(!isValidIBAN(iban)){
+        if (!isValidIBAN(iban)) {
             this.setState({
                 isError: true,
                 errorMessage: "Iban is invalid"
@@ -59,7 +59,7 @@ export class Register extends Component {
             return;
         }
 
-        const user = {username, password, name, email, street, streetNumber, city, cityCode,iban}
+        const user = {username, password, name, email, street, streetNumber, city, cityCode, iban}
 
         const options = {
             headers: {'Content-type': 'application/json'},
@@ -91,108 +91,125 @@ export class Register extends Component {
     render() {
         const {isLoggedIn, isError, errorMessage} = this.state
         return (
-            <div className="container-sm">
-                <form onSubmit={this.handleSubmit}>
-                    <h3>Sign Up</h3>
-                    <div className="mb-3">
-                        <label>Name</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Name"
-                            name="name"
-                            value={this.state.name}
-                            onChange={this.handleInputChange}
-                        />
+            <>
+                <header className="bg-dark py-2">
+                    <div className="container px-4 px-lg-5 my-5">
+                        <div className="text-center text-white">
+                            <h3 className="display-6 fw-bolder">Register</h3>
+                        </div>
                     </div>
-                    <div className="mb-3">
-                        <label>Username</label>
-                        <input type="text" className="form-control" placeholder="Username" name="username"
-                               onChange={this.handleInputChange}
-                               value={this.state.username}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label>Email address</label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            placeholder="Enter email"
-                            name="email"
-                            onChange={this.handleInputChange}
-                            value={this.state.email}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            placeholder="Enter password"
-                            name="password"
-                            onChange={this.handleInputChange}
-                            value={this.state.password}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label>Street</label>
-                        <input type="text" className="form-control" placeholder="Street" name="street"
-                               onChange={this.handleInputChange}
-                               value={this.state.street}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label>Street Number</label>
-                        <input type="text" className="form-control" placeholder="Street Number" name="streetNumber"
-                               onChange={this.handleInputChange}
-                               value={this.state.streetNumber}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label>City Code</label>
-                        <input type="text" className="form-control" placeholder="City Code" name="cityCode"
-                               onChange={this.handleInputChange}
-                               value={this.state.cityCode}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label>City</label>
-                        <input type="text" className="form-control" placeholder="City" name="city"
-                               onChange={this.handleInputChange}
-                               value={this.state.city}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label>IBAN</label>
-                        <input type="text" className="form-control" placeholder="IBAN Number" name="iban"
-                               onChange={this.handleInputChange}
-                               value={this.state.iban}
-                               onKeyUp={e => {
-                                   let val = e.target.value;
-                                   const len = val.length;
-                                   const key = e.key;
+                </header>
+                <div className="container p-5 col-md-7 col-md-4">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className={"row"}>
+                            <div className="col mb-3">
+                                <label>Name</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Name"
+                                    name="name"
+                                    value={this.state.name}
+                                    onChange={this.handleInputChange}
+                                />
+                            </div>
+                            <div className="col mb-3">
+                                <label>Username</label>
+                                <input type="text" className="form-control" placeholder="Username" name="username"
+                                       onChange={this.handleInputChange}
+                                       value={this.state.username}
+                                />
+                            </div>
+                        </div>
+                        <div className={"row"}>
+                            <div className="col mb-3">
+                                <label>Email address</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    placeholder="Enter email"
+                                    name="email"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.email}
+                                />
+                            </div>
+                            <div className="col mb-3">
+                                <label>Password</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    placeholder="Enter password"
+                                    name="password"
+                                    onChange={this.handleInputChange}
+                                    value={this.state.password}
+                                />
+                            </div>
+                        </div>
+                        <div className={"row"}>
+                            <div className="col mb-3">
+                                <label>Street</label>
+                                <input type="text" className="form-control" placeholder="Street" name="street"
+                                       onChange={this.handleInputChange}
+                                       value={this.state.street}
+                                />
+                            </div>
+                            <div className="col mb-3">
+                                <label>Street Number</label>
+                                <input type="text" className="form-control" placeholder="Street Number"
+                                       name="streetNumber"
+                                       onChange={this.handleInputChange}
+                                       value={this.state.streetNumber}
+                                />
+                            </div>
+                        </div>
+                        <div className={"row"}>
+                            <div className="col mb-3">
+                                <label>City</label>
+                                <input type="text" className="form-control" placeholder="City" name="city"
+                                       onChange={this.handleInputChange}
+                                       value={this.state.city}
+                                />
+                            </div>
+                            <div className="col mb-3">
+                                <label>City Code</label>
+                                <input type="text" className="form-control" placeholder="City Code" name="cityCode"
+                                       onChange={this.handleInputChange}
+                                       value={this.state.cityCode}
+                                />
+                            </div>
+                        </div>
+                        <div className="mb-3">
+                            <label>IBAN</label>
+                            <input type="text" className="form-control" placeholder="IBAN Number" name="iban"
+                                   onChange={this.handleInputChange}
+                                   value={this.state.iban}
+                                   onKeyUp={e => {
+                                       let val = e.target.value;
+                                       const len = val.length;
+                                       const key = e.key;
 
-                                   if(key === "Backspace")
-                                       if(len === 5 || len === 10 || len === 15 || len === 20 || len === 25 || len === 30 || len === 35 || len === 40)
-                                           e.target.value=val.slice(0,-1)
-                                       else e.target.value=val
-                                   else if(len === 4 || len === 9 || len === 14 || len === 19 || len === 24 || len === 29 || len === 34 || len === 39)
-                                       e.target.value=(val + " ")
-                                   else e.target.value=val
-                                }}
-                        />
-                    </div>
-                    <div className="d-grid">
-                        <button type="submit" className="btn btn-primary">
-                            Sign Up
-                        </button>
-                    </div>
-                    <p className="forgot-password text-right">
-                        Already registered <a href="/sign-in">sign in?</a>
-                    </p>
-                    {isError && <div>{errorMessage}</div>}
-                </form>
-            </div>
+                                       if (key === "Backspace")
+                                           if (len === 5 || len === 10 || len === 15 || len === 20 || len === 25 || len === 30 || len === 35 || len === 40)
+                                               e.target.value = val.slice(0, -1)
+                                           else e.target.value = val
+                                       else if (len === 4 || len === 9 || len === 14 || len === 19 || len === 24 || len === 29 || len === 34 || len === 39)
+                                           e.target.value = (val + " ")
+                                       else e.target.value = val
+                                   }}
+                            />
+                        </div>
+                        <div className="text-center">
+                            <button type="submit" className="btn btn-primary">
+                                Sign Up
+                            </button>
+                            <p className="mt-3">
+                                Already registered <a href="/login"> login?</a>
+                            </p>
+                        </div>
+                        {isError && <div>{errorMessage}</div>}
+                    </form>
+                </div>
+            </>
         );
     }
 }
