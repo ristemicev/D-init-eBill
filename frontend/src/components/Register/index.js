@@ -51,7 +51,7 @@ export class Register extends Component {
             return
         }
 
-        if (!isValidIBAN(iban)) {
+        if (!isValidIBAN(iban.replace(/\s+/g, ''))) {
             this.setState({
                 isError: true,
                 errorMessage: "Iban is invalid"
